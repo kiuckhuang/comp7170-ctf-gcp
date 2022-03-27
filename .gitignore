@@ -1,3 +1,8 @@
+# Google App Engine generated folder
+appengine-generated/
+env_variables.yaml
+service-account-file.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

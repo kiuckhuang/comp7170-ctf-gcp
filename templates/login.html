@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ABC Company - login page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        function validateForm() {
+            let str_username = document.forms["login"]["username"].value;
+            let str_password = document.forms["login"]["password"].value;
+            // username only can use a-z, A-Z, 0-9, ., _, - and must be >=4 chars
+            var re_username = /^([a-zA-Z]{1,}[a-zA-Z0-9\-\_\.]{3,})$/;
+            // check if password contains sql injection chars
+            var re_password1 = /\'/; 
+            var re_password2 = /\-\-/; 
+
+            if (str_username == "" || str_password == "") {
+                alert("Username and Password must be filled out");
+                return false;
+            } else if (re_username.test(String(str_username)) == false) {
+                alert("Invalid Username");
+                return false;
+            } else if (re_password1.test(String(str_password)) == true || re_password2.test(String(str_password)) == true) {
+                alert("Password is invalid");
+                return false;
+            }else{
+                return true;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Please login</h1>
+        <br>
+        <form name="login" action="/login" method="post" onsubmit="return validateForm()">
+            <input type="text" placeholder="Username" name="username" value="{{ request.form.username }}">
+            <input type="password" placeholder="Password" name="password" value="">
+            <input class="btn btn-default" type="submit" value="Login">
+        </form>
+        {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+    </div>
+</body>
+
+</html>
