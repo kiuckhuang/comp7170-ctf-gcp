@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>ABC Company - login page</title>
+    <title>___Company - login page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -13,8 +13,8 @@
             // username only can use a-z, A-Z, 0-9, ., _, - and must be >=4 chars
             var re_username = /^([a-zA-Z]{1,}[a-zA-Z0-9\-\_\.]{3,})$/;
             // check if password contains sql injection chars
-            var re_password1 = /\'/; 
-            var re_password2 = /\-\-/; 
+            var re_password1 = /\'/;
+            var re_password2 = /\-\-/;
 
             if (str_username == "" || str_password == "") {
                 alert("Username and Password must be filled out");
@@ -25,7 +25,7 @@
             } else if (re_password1.test(String(str_password)) == true || re_password2.test(String(str_password)) == true) {
                 alert("Password is invalid");
                 return false;
-            }else{
+            } else {
                 return true;
             }
         }
@@ -34,16 +34,26 @@
 
 <body>
     <div class="container">
-        <h1>Please login</h1>
+        <h2>___Company System</h2>
+        <h2>Please login</h2>
         <br>
         <form name="login" action="/login" method="post" onsubmit="return validateForm()">
             <input type="text" placeholder="Username" name="username" value="{{ request.form.username }}">
             <input type="password" placeholder="Password" name="password" value="">
             <input class="btn btn-default" type="submit" value="Login">
         </form>
+        <br>
         {% if error %}
         <p class="error"><strong>Error:</strong> {{ error }}
-        {% endif %}
+            {% endif %}
+
+        <br>
+        <p>
+            <strong>
+                Copyright ___Company 2022. All contents of this website, including the Javascript source codes, are
+                properties of ___Company. You are not authorize to copy any of the source codes.
+            </strong>
+        </p>
     </div>
 </body>
 
