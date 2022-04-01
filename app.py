@@ -33,7 +33,7 @@ def login():
     return render_template('login.html', error=error)
 
 def main():
-    app.run(debug=False, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    app.run(debug=False, host="127.0.0.1", port=int(os.environ.get("PORT", 8080)))
 
 if __name__ == '__main__':
     main()
