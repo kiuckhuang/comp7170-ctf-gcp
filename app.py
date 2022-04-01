@@ -10,26 +10,30 @@ def index():
     return render_template('login.html')
 
 # Route for handling the login page logic
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['POST'])
 def login():
-    error = None
-    if request.method == 'POST':
-        connection = sqlite3.connect('db/data.db')
-        # create a database cursor
-        cur = connection.cursor()
-        
+    connection = sqlite3.connect('db/data.db')
+    # create a database cursor
+    cur = connection.cursor()
+    
+    try:
         # use prepare statement to avoid any sql injection
         #cur.execute('SELECT count(*) FROM users WHERE username = ? AND password = ?;', (request.form['username'], request.form['password']))
 
         # vulnerable to sql injection attacks
-        cur.execute(f"SELECT count(*) FROM users WHERE username = '{request.form['username']}' AND password='{request.form['password']}'")
+        query = "SELECT count(*) FROM users WHERE username = '%s' AND password = '%s'" % (request.form['username'], request.form['password'])
+        #print(query)
+        cur.execute(query)
         result = cur.fetchone()
-        print(result[0])
+        #print(result[0])
         if int(result[0]) > 0:
+            connection.close()
             return render_template('ctf.html', ctf=ctf)
-        else:
-            # User does not exist
-            error = 'Invalid Credentials. Please try again.'
+
+    except sqlite3.OperationalError:
+        print(query)
+    connection.close()
+    error = 'Invalid Credentials. Please try again.'
     return render_template('login.html', error=error)
 
 def main():
