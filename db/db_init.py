@@ -42,10 +42,10 @@ pass2 = 'uG4dsM.E-2q!gfn'
 insert_query = """
 INSERT INTO users (username, password) VALUES (?, ?);
 """
-#cur.execute(insert_query, (user1, pass1))
-#cur.execute(insert_query, (user2, pass2))
+cur.execute(insert_query, (user1, pass1))
+cur.execute(insert_query, (user2, pass2))
 # save it in the database file
-#connection.commit()
+connection.commit()
 
 #
 # Querying the database
