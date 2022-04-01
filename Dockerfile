@@ -3,7 +3,7 @@
 FROM python:3.10-slim
 
 # Allow statements and log messages to immediately appear in the Knative logs
-ENV PYTHONUNBUFFERED True
+ENV PYTHONUNBUFFERED Truepy 
 
 # Copy local code to the container image.
 ENV APP_HOME /app
@@ -21,7 +21,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
 #CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
 ENV FLASK_ENV "development"
-CMD [ "python", "./app.py" ]
+ENV PORT 8080
+CMD [ "python", "app.py" ]
 
 # [END run_helloworld_dockerfile]
 # [END cloudrun_helloworld_dockerfile]
