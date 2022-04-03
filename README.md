@@ -15,9 +15,9 @@ docker run -p 8080:8080 --name comp7170-ctf-gcp -d comp7170-ctf-gcp
 # Docker Repository
 ## tag and push to docker repo
 ```
-docker buildx build --platform linux/amd64,linux/arm64 -t kiuckhuang/comp7170:ctf_version1 --push .
+docker buildx build --platform linux/amd64,linux/arm64 -t kiuckhuang/comp7170_ctf:latest --push .
 ```
 ## run from repo
 ```
-docker run -p 8080:8080 --name comp7170-ctf-v1 -d kiuckhuang/comp7170:ctf_version1
+docker run -p 8080:8080 --name comp7170-ctf-v1 -d kiuckhuang/comp7170_ctf:latest
 ```
