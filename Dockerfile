@@ -22,6 +22,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 #CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
 ENV FLASK_ENV "development"
 ENV PORT 8080
+EXPOSE ${PORT}
 CMD [ "python", "app.py" ]
 
 # [END run_helloworld_dockerfile]
